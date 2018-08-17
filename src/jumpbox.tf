@@ -16,10 +16,11 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "jumpbox" {
-  ami               = "${data.aws_ami.ubuntu.id}"
-  availability_zone = "${var.default_az}"
-  instance_type     = "t2.micro"
-  subnet_id         = "${aws_subnet.public.id}"
+  ami                                  = "${data.aws_ami.ubuntu.id}"
+  availability_zone                    = "${var.default_az}"
+  instance_type                        = "t2.micro"
+  subnet_id                            = "${aws_subnet.public.id}"
+  instance_initiated_shutdown_behavior = "terminate"
 
   vpc_security_group_ids = [
     "${aws_security_group.ehime.id}",
