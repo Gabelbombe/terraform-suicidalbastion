@@ -6,18 +6,18 @@ output "jumpbox_dns" {
   value = "${aws_instance.jumpbox.public_dns}"
 }
 
-output "ge_subnet_cidr" {
-  value = "${var.ge_subnet_cidr}"
+output "ehime_subnet_cidr" {
+  value = "${var.ehime_subnet_cidr}"
 }
 
-output "ge_gw" {
-  value = "${var.ge_gw}"
+output "ehime_gw" {
+  value = "${var.ehime_gw}"
 }
 
-output "ge_ip" {
-  value = "${var.ge_ip}"
+output "ehime_ip" {
+  value = "${var.ehime_ip}"
 }
 
-output "ge_subnet" {
-  value = "${aws_subnet.ge.id}"
+output "ehime_subnet" {
+  value = "${aws_subnet.ehime.id}"
 }
