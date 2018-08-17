@@ -47,7 +47,7 @@ resource "aws_route_table" "ge" {
   }
 
   tags {
-    Name = "Private Subnet"
+    Name = "private-net"
   }
 }
 
