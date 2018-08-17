@@ -43,3 +43,8 @@ However, this part of the tutorial is only recommended for those who have prior 
     ```
 
 1. To create an auto-takedown instance run `destroy.sh` inside of your provisioning section of `nat.tf` and `jumpbox.tf` adjustment times can be variablized and added as templates
+
+
+### Author
+
+Maintained by [Jd Daniel](mailto:dodomeki@gmail.com)
