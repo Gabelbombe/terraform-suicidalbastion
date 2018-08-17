@@ -16,16 +16,16 @@ resource "aws_subnet" "public" {
   }
 }
 
-/** private network for the ge-health managed vms */
-resource "aws_subnet" "ge" {
+/** private network for the Ehimeprefecture managed vms */
+resource "aws_subnet" "ehime" {
   vpc_id                  = "${aws_vpc.default.id}"
-  cidr_block              = "${var.ge_subnet_cidr}"
+  cidr_block              = "${var.ehime_subnet_cidr}"
   availability_zone       = "${var.default_az}"
   map_public_ip_on_launch = false
   depends_on              = ["aws_instance.nat"]
 
   tags {
-    Name = "ge-net"
+    Name = "ehime-net"
   }
 }
 
@@ -38,7 +38,7 @@ resource "aws_route_table" "public" {
   }
 }
 
-resource "aws_route_table" "ge" {
+resource "aws_route_table" "ehime" {
   vpc_id = "${aws_vpc.default.id}"
 
   route {
@@ -56,7 +56,7 @@ resource "aws_route_table_association" "public" {
   route_table_id = "${aws_route_table.public.id}"
 }
 
-resource "aws_route_table_association" "ge" {
-  subnet_id      = "${aws_subnet.ge.id}"
-  route_table_id = "${aws_route_table.ge.id}"
+resource "aws_route_table_association" "ehime" {
+  subnet_id      = "${aws_subnet.ehime.id}"
+  route_table_id = "${aws_route_table.ehime.id}"
 }

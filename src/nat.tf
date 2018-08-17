@@ -5,7 +5,7 @@ resource "aws_instance" "nat" {
   instance_type     = "t2.micro"
 
   vpc_security_group_ids = [
-    "${aws_security_group.ge.id}",
+    "${aws_security_group.ehime.id}",
     "${aws_security_group.vpc_nat.id}",
     "${aws_security_group.ssh.id}",
   ]

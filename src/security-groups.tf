@@ -45,8 +45,8 @@ resource "aws_security_group" "vpc_nat" {
   }
 }
 
-resource "aws_security_group" "ge" {
-  name        = "ge"
+resource "aws_security_group" "ehime" {
+  name        = "ehime"
   description = "Security group for GE Healthcare vms"
   vpc_id      = "${aws_vpc.default.id}"
 
@@ -65,6 +65,6 @@ resource "aws_security_group" "ge" {
   }
 
   tags {
-    Name = "ge-sg"
+    Name = "ehime-sg"
   }
 }

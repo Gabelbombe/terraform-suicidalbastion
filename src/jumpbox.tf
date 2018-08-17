@@ -1,20 +1,42 @@
 /** jumpbox instance */
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
 resource "aws_instance" "jumpbox" {
-  ami                    = "${lookup(var.amis, var.region)}"
-  availability_zone      = "${var.default_az}"
-  instance_type          = "t2.micro"
-  subnet_id              = "${aws_subnet.public.id}"
-  vpc_security_group_ids = ["${aws_security_group.ge.id}", "${aws_security_group.vpc_nat.id}", "${aws_security_group.ssh.id}"]
-  key_name               = "${aws_key_pair.tf-deployment.key_name}"
+  ami               = "${data.aws_ami.ubuntu.id}"
+  availability_zone = "${var.default_az}"
+  instance_type     = "t2.micro"
+  subnet_id         = "${aws_subnet.public.id}"
+
+  vpc_security_group_ids = [
+    "${aws_security_group.ehime.id}",
+    "${aws_security_group.vpc_nat.id}",
+    "${aws_security_group.ssh.id}",
+  ]
+
+  key_name = "${aws_key_pair.tf-deployment.key_name}"
 
   /* ensure that the nat instance and network are up and running */
-  depends_on = ["aws_instance.nat", "aws_subnet.ge"]
+  depends_on = ["aws_instance.nat", "aws_subnet.ehime"]
 
   provisioner "local-exec" {
     command = "echo  ${aws_instance.jumpbox.public_dns} > dns-info.txt"
   }
 
-  /** copy the ge key to the jumpbox */
+  /** copy the ehime key to the jumpbox */
   provisioner "file" {
     connection {
       user        = "ubuntu"
@@ -23,8 +45,8 @@ resource "aws_instance" "jumpbox" {
       private_key = "${file("ssh/tf-deployment.pem")}"
     }
 
-    source      = "ssh/ge.pem"
-    destination = "/home/ubuntu/.ssh/ge.pem"
+    source      = "ssh/ehime.pem"
+    destination = "/home/ubuntu/.ssh/ehime.pem"
   }
 
   /** copy the install script to the jumpbox */
@@ -51,7 +73,7 @@ resource "aws_instance" "jumpbox" {
 
     inline = [
       "chmod +x install.sh",
-      "./install.sh ${var.ge_subnet_cidr} ${var.ge_gw} ${var.ge_ip} ${var.access_key} ${var.secret_key} ${aws_subnet.ge.id} ${var.default_az} ${var.region} ~/.ssh/ge.pem",
+      "./install.sh ${var.ehime_subnet_cidr} ${var.ehime_gw} ${var.ehime_ip} ${var.access_key} ${var.secret_key} ${aws_subnet.ehime.id} ${var.default_az} ${var.region} ~/.ssh/ehime.pem",
     ]
   }
 
