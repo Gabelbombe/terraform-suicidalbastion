@@ -43,11 +43,11 @@ resource "aws_instance" "jumpbox" {
       user        = "ubuntu"
       host        = "${aws_instance.jumpbox.public_dns}"
       timeout     = "1m"
-      private_key = "${file("ssh/tf-deployment.pem")}"
+      private_key = "${file("~/.ssh/tf-deployment.pem")}"
     }
 
-    source      = "ssh/ehime.pem"
-    destination = "/home/ubuntu/.ssh/ehime.pem"
+    source      = "ssh/ehime-jumpbox.pem"
+    destination = "/home/ubuntu/.ssh/ehime-jumpbox.pem"
   }
 
   /** copy the install script to the jumpbox */
@@ -56,7 +56,7 @@ resource "aws_instance" "jumpbox" {
       user        = "ubuntu"
       host        = "${aws_instance.jumpbox.public_dns}"
       timeout     = "1m"
-      private_key = "${file("ssh/tf-deployment.pem")}"
+      private_key = "${file("~/.ssh/tf-deployment.pem")}"
     }
 
     source      = "ec2/install.sh"
@@ -69,12 +69,12 @@ resource "aws_instance" "jumpbox" {
       user        = "ubuntu"
       host        = "${aws_instance.jumpbox.public_dns}"
       timeout     = "25m"
-      private_key = "${file("ssh/tf-deployment.pem")}"
+      private_key = "${file("~/.ssh/tf-deployment.pem")}"
     }
 
     inline = [
       "chmod +x install.sh",
-      "./install.sh ${var.ehime_subnet_cidr} ${var.ehime_gw} ${var.ehime_ip} ${var.access_key} ${var.secret_key} ${aws_subnet.ehime.id} ${var.default_az} ${var.region} ~/.ssh/ehime.pem",
+      "./install.sh ${var.ehime_subnet_cidr} ${var.ehime_gw} ${var.ehime_ip} ${var.access_key} ${var.secret_key} ${aws_subnet.ehime.id} ${var.default_az} ${var.region} ~/.ssh/ehime-jumpbox.pem",
     ]
   }
 

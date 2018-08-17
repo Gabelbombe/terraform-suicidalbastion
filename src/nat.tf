@@ -20,7 +20,7 @@ resource "aws_instance" "nat" {
     connection {
       user        = "ubuntu"
       timeout     = "5m"
-      private_key = "${file("ssh/tf-deployment.pem")}"
+      private_key = "${file("~/.ssh/tf-deployment.pem")}"
     }
 
     inline = [
