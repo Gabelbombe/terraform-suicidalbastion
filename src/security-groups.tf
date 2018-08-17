@@ -47,7 +47,7 @@ resource "aws_security_group" "vpc_nat" {
 
 resource "aws_security_group" "ehime" {
   name        = "ehime"
-  description = "Security group for GE Healthcare vms"
+  description = "Security group for Ehimeprefecture vms"
   vpc_id      = "${aws_vpc.default.id}"
 
   ingress {

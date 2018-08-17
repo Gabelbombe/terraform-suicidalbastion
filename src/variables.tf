@@ -22,7 +22,7 @@ variable "default_az" {
 
 /** Region which is used by default during te rollout */
 variable "region" {
-  description = "AWS region to host the GE Healthcare network"
+  description = "AWS region to host the Ehimeprefecture network"
   default     = "us-west-2"
 }
 
