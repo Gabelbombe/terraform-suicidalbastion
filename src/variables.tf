@@ -42,7 +42,7 @@ variable "vpc_cidr" {
 }
 
 variable "ehime_ip" {
-  description = "Ehimeprefecture Director IP"
+  description = "Ehimeprefecture Director IP (if needed)"
   default     = "10.0.1.6"
 }
 
