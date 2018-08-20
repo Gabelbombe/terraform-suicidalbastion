@@ -46,7 +46,7 @@ resource "aws_instance" "jumpbox" {
       private_key = "${file("~/.ssh/tf-deployment.pem")}"
     }
 
-    source      = "ssh/ehime-jumpbox.pem"
+    source      = "~/.ssh/ehime-jumpbox.pem"
     destination = "/home/ubuntu/.ssh/ehime-jumpbox.pem"
   }
 
