@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-set +e -x
+#!/usr/bin/env bash +e
 
 deployment_key="deployment"
 deployment_path=ssh/${deployment_key}
@@ -14,14 +12,14 @@ cd $(dirname $0)/src
 
 # Generate keys for the rollout (deployment.pem/pub) and the jumpbox rollout (jumpbox.pub/.pem) in the sub directory ssh
 mkdir -p ssh
-[ ! -f ${deployment_pem}  ] && {
-  ssh-keygen -t rsa -C "${deployment_key}" -P '' -f ${deployment_path} -b 4096
+[ ! -f "${deployment_pem}"  ] && {
+  ssh-keygen -t rsa -C "${deployment_key}" -P '' -f ${deployment_path} -b 1024
   mv ${deployment_path} ${deployment_pem}
   chmod 400 ${deployment_pem}
 }
 
-[ ! -f ${jumpbox_pem}  ] && {
-  ssh-keygen -t rsa -C "${jumpbox_key}" -P '' -f ${jumpbox_path} -b 4096
+[ ! -f "${jumpbox_pem}"  ] && {
+  ssh-keygen -t rsa -C "${jumpbox_key}" -P '' -f ${jumpbox_path} -b 1024
   mv ${jumpbox_path} ${jumpbox_pem}
   chmod 400 ${jumpbox_pem}
 }
