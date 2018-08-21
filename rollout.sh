@@ -3,11 +3,11 @@
 set +e
 
 tf-deployment_key="tf-deployment"
-tf-deployment_path=~/.ssh/${tf-deployment_key}
+tf-deployment_path=ssh/${tf-deployment_key}
 tf-deployment_pem="${tf-deployment_path}.pem"
 
 ehime_key="ehime"
-ehime_path=~/.ssh/${ehime_key}
+ehime_path=ssh/${ehime_key}
 ehime_pem="${ehime_path}.pem"
 
 cd $(dirname $0)/src
@@ -21,7 +21,7 @@ mkdir -p ssh
 }
 
 [ ! -f ${ehime_pem}  ] && {
-    ssh-keygen -t rsa -C "${ehime_key}" -P '' -f ${ehime_path} -b 4096
+  ssh-keygen -t rsa -C "${ehime_key}" -P '' -f ${ehime_path} -b 4096
   mv ${ehime_path} ${ehime_pem}
   chmod 400 ${ehime_pem}
 }

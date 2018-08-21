@@ -55,3 +55,8 @@ variable "public_subnet_cidr" {
   description = "CIDR for public subnet"
   default     = "10.0.0.0/24"
 }
+
+variable "death_clock" {
+  description = "Countdown [in hours] until box commits suicide"
+  default     = "1"
+}

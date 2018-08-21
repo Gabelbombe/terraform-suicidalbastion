@@ -1,3 +1,7 @@
+output "death_clock" {
+  value = "${var.death_clock}"
+}
+
 output "jumpbox_ip" {
   value = "${aws_instance.jumpbox.public_ip}"
 }
