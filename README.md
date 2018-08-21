@@ -1,4 +1,4 @@
-# BOOM?!
+# A Self-Terminating Bastion host
 
 [![Build Status](https://travis-ci.org/ehime/terraform-suicidalbastion.svg?branch=master)](https://travis-ci.org/ehime/terraform-suicidalbastion)
 
