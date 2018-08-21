@@ -14,13 +14,13 @@ resource "aws_instance" "nat" {
   subnet_id                   = "${aws_subnet.public.id}"
   associate_public_ip_address = true
   source_dest_check           = false
-  key_name                    = "${aws_key_pair.tf-deployment.key_name}"
+  key_name                    = "${aws_key_pair.deployment.key_name}"
 
   provisioner "remote-exec" {
     connection {
       user        = "ubuntu"
       timeout     = "5m"
-      private_key = "${file("ssh/tf-deployment.pem")}"
+      private_key = "${file("ssh/deployment.pem")}"
     }
 
     inline = [
