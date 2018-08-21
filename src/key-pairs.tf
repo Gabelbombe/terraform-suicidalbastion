@@ -6,6 +6,6 @@ resource "aws_key_pair" "deployment" {
 
 /** key for ehime */
 resource "aws_key_pair" "ehime" {
-  key_name   = "ehime-jumpbox"
-  public_key = "${file("ssh/ehime-jumpbox.pem")}"
+  key_name   = "jumpbox"
+  public_key = "${file("ssh/jumpbox.pem")}"
 }

@@ -26,6 +26,9 @@ mkdir -p ssh
   chmod 400 ${jumpbox_pem}
 }
 
+# Start her up
+[ ! -d '.terraform' ] && terraform init
+
 # Deploy the nat instance, jumpbox instance with terraform; moreover trigger the script to create a jumpbox director
 terraform plan --out=plan
 terraform apply plan
