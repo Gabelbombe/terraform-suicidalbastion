@@ -73,8 +73,7 @@ resource "aws_instance" "jumpbox" {
     }
 
     inline = [
-      "chmod +x install.sh", "./install.sh ${var.ehime_subnet_cidr} ${var.ehime_gw} ${var.ehime_ip} ${var.access_key} ${var.secret_key} ${aws_subnet.ehime.id} ${var.default_az} ${var.region} ssh/jumpbox.pem",
-      "chmod +x destroy.sh", "./destroy.sh ${var.death_clock}",
+      "chmod +x install.sh", "echo ./install.sh ${var.ehime_subnet_cidr} ${var.ehime_gw} ${var.ehime_ip} ${var.access_key} ${var.secret_key} ${aws_subnet.ehime.id} ${var.default_az} ${var.region} ssh/jumpbox.pem",
     ]
   }
 
