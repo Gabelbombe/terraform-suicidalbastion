@@ -27,7 +27,7 @@ However, this part of the tutorial is only recommended for those who have prior 
     touch terraform.tfvars
     echo -e "
     access_key=...
-    secret_key=..." >> terraform.tfvars
+    secret_key=..." >> src/terraform.tfvars
     ```
 
 1. Execute the rollout script to deploy the bastion. For internet access an auxiliary NAT instance will be rolled out.
@@ -35,6 +35,12 @@ However, this part of the tutorial is only recommended for those who have prior 
      ```bash
      ./rollout.sh
      ```
+
+1. Sign into your instance with the following
+
+    ```bash
+    ssh ubuntu@${IP_ADDRESS} -i ssh/deployment.pem
+    ```
 
 1. To destroy your environment after you finished the guide, execute the destroy script. You may want to go through your AWS console to make sure that everything is destroyed as planned.
 

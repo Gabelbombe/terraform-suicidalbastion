@@ -35,9 +35,9 @@ mkdir -p ssh
 
 
 # Deploy the nat instance, jumpbox instance with terraform; moreover trigger the script to create a jumpbox director
-terraform plan      2>&1 >| ../logs/plan.log
-terraform apply     2>&1 >| ../logs/apply.log
+terraform plan  -state=../_state/us-west-2_jumpbox.tfstate    2>&1 |tee ../_logs/plan.log
+terraform apply -state=../_state/us-west-2_jumpbox.tfstate    2>&1 |tee ../_logs/apply.log
 
 
 # But who was phone?
-terraform output    2>&1 >| ../logs/out.log
+terraform output    2>&1 |tee ../_logs/out.log
