@@ -51,7 +51,7 @@ graph:
 
 ###############################################
 # Deploy
-# - follows standard practice
+# - follows standard design patterns
 ###############################################
 plan-jumpbox: .source-dir .check-region .check-sshdir
 	echo -e "\n\n\n\nplan-jumpbox: $(date +"%Y-%m-%d @ %H:%M:%S")\n" \
@@ -76,7 +76,10 @@ apply-jumpbox: .source-dir .check-region .check-sshdir
 		-var region="${REGION}" 											\
 	2>&1 |tee $(LOGS_DIR)/apply.log
 
+
 destroy-jumpbox: .source-dir .check-region
+	echo -e "\n\n\n\ndestroy-jumpbox: $(date +"%Y-%m-%d @ %H:%M:%S")\n" \
+	>> $(LOGS_DIR)/destroy.log
 	terraform destroy 															\
 		-auto-approve																	\
 		-state=$(STATE_DIR)/${REGION}-jumpbox.tfstate \
@@ -84,3 +87,4 @@ destroy-jumpbox: .source-dir .check-region
 	2>&1 |tee $(LOGS_DIR)/destroy.log
 
 purge-jumpbox: destroy-jumpbox clean
+	@rm -fr ssh
