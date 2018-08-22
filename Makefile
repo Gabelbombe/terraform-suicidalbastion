@@ -62,7 +62,7 @@ plan-jumpbox: .source-dir .check-region .check-sshdir
 	terraform plan 																	\
 		-state=$(STATE_DIR)/${REGION}-jumpbox.tfstate \
 		-var region="${REGION}" 											\
-	2>&1 >| $(LOGS_DIR)/plan.log
+	2>&1 |tee $(LOGS_DIR)/plan.log
 
 
 apply-jumpbox: .source-dir .check-region .check-sshdir
