@@ -86,5 +86,7 @@ destroy-jumpbox: .source-dir .check-region
 		-var region="${REGION}" 											\
 	2>&1 |tee $(LOGS_DIR)/destroy.log
 
+
 purge-jumpbox: destroy-jumpbox clean
+	@rm -f  $(STATE_DIR)/${REGION}-jumpbox.tfstate
 	@rm -fr ssh
