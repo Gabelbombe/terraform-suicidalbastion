@@ -54,7 +54,11 @@ graph:
 # - follows standard practice
 ###############################################
 plan-jumpbox: .source-dir .check-region .check-sshdir
-	terraform init 2>&1 >| $(LOGS_DIR)/init.log
+	echo -e "\n\n\n\nplan-jumpbox: $(date +"%Y-%m-%d @ %H:%M:%S")\n" \
+	>> $(LOGS_DIR)/init.log
+	terraform init 2>&1 |tee $(LOGS_DIR)/init.log
+	echo -e "\n\n\n\nplan-jumpbox: $(date +"%Y-%m-%d @ %H:%M:%S")\n" \
+	>> $(LOGS_DIR)/plan.log
 	terraform plan 																	\
 		-state=$(STATE_DIR)/${REGION}-jumpbox.tfstate \
 		-var region="${REGION}" 											\
@@ -62,16 +66,20 @@ plan-jumpbox: .source-dir .check-region .check-sshdir
 
 
 apply-jumpbox: .source-dir .check-region .check-sshdir
-	terraform init 2>&1 >> $(LOGS_DIR)/init.log
-	terraform apply 																\
+	echo -e "\n\n\n\napply-jumpbox: $(date +"%Y-%m-%d @ %H:%M:%S")\n" \
+	>> $(LOGS_DIR)/init.log
+	terraform init 2>&1 |tee $(LOGS_DIR)/init.log
+	echo -e "\n\n\n\napply-jumpbox: $(date +"%Y-%m-%d @ %H:%M:%S")\n" \
+	>> $(LOGS_DIR)/apply.log
+	terraform apply -auto-approve										\
 		-state=$(STATE_DIR)/${REGION}-jumpbox.tfstate \
 		-var region="${REGION}" 											\
-	2>&1 >| $(LOGS_DIR)/apply.log
+	2>&1 |tee $(LOGS_DIR)/apply.log
 
 destroy-jumpbox: .source-dir .check-region
 	terraform destroy 															\
 		-state=$(STATE_DIR)/${REGION}-jumpbox.tfstate \
 		-var region="${REGION}" 											\
-	2>&1 >| $(LOGS_DIR)/destroy.log
+	2>&1 |tee $(LOGS_DIR)/destroy.log
 
 purge-jumpbox: destroy-jumpbox clean
