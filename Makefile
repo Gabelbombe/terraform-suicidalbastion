@@ -78,6 +78,7 @@ apply-jumpbox: .source-dir .check-region .check-sshdir
 
 destroy-jumpbox: .source-dir .check-region
 	terraform destroy 															\
+		-auto-approve																	\
 		-state=$(STATE_DIR)/${REGION}-jumpbox.tfstate \
 		-var region="${REGION}" 											\
 	2>&1 |tee $(LOGS_DIR)/destroy.log
