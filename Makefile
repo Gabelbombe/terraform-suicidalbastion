@@ -71,7 +71,7 @@ plan-jumpbox: .source-dir .check-region .check-sshdir
 		>> $(LOGS_DIR)/plan.log
 	terraform plan 																											\
 		-state=$(STATE_DIR)/$(ACCOUNT_ID)/${REGION}-jumpbox.tfstate 			\
-		-var region="${REGION}" 																					\
+		-var region="${REGION}"  																					\
 	2>&1 |tee $(LOGS_DIR)/plan.log
 
 
