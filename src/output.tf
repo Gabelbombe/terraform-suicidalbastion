@@ -10,6 +10,10 @@ output "jumpbox_dns" {
   value = "${aws_instance.jumpbox.public_dns}"
 }
 
+output "jumpbox_region" {
+  value = "${var.region}"
+}
+
 output "ehime_subnet_cidr" {
   value = "${var.ehime_subnet_cidr}"
 }

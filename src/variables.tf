@@ -30,7 +30,7 @@ variable "default_az" {
     us-east-1      = "us-east-1a"
     us-east-2      = "us-east-2a"
     us-west-1      = "us-west-1a"
-    us-west-2      = "us-west-1a"
+    us-west-2      = "us-west-2a"
     ca-central-1   = "ca-central-1a"
     eu-west-1      = "eu-west-1a"
     eu-central-1   = "eu-central-1a"
