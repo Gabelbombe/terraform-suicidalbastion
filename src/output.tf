@@ -2,10 +2,6 @@ output "death_clock" {
   value = "${var.death_clock}hrs"
 }
 
-output "ssh_output" {
-  value = "ssh ubuntu@${var.jumpbox_ip} -i src/ssh/deployment.pem"
-}
-
 output "jumpbox_ip" {
   value = "${aws_instance.jumpbox.public_ip}"
 }

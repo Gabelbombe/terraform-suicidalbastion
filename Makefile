@@ -51,11 +51,12 @@ AWS_ID?=default
 # - follows standard design patterns
 ###############################################
 graph: .source-dir
-	terraform graph |dot -Tpng >| logs/graph.png
+	terraform graph |dot -Tpng >| $(LOGS_DIR)/graph.png
 
 clean:
-	@rm -f logs/graph.png
 	@rm -rf .terraform
+	@rm -f $(LOGS_DIR)/graph.png
+	@rm -f $(LOGS_DIR)/*.log
 
 
 
