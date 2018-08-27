@@ -37,8 +37,8 @@ variable "default_az" {
     eu-west-2      = "eu-west-2a"
     ap-southeast-1 = "ap-southeast-1a"
     ap-southeast-2 = "ap-southeast-2a"
-    ap-northeast-2 = "ap-northeast-2a"
     ap-northeast-1 = "ap-northeast-1a"
+    ap-northeast-2 = "ap-northeast-2a"
     ap-south-1     = "ap-south-1a"
     sa-east-1      = "sa-east-1a"
   }
