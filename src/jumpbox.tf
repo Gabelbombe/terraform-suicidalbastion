@@ -17,7 +17,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "jumpbox" {
   ami                                  = "${data.aws_ami.ubuntu.id}"
-  availability_zone                    = "${var.default_az}"
+  availability_zone                    = "${lookup(var.default_az, var.region)}"
   instance_type                        = "t2.micro"
   subnet_id                            = "${aws_subnet.public.id}"
   instance_initiated_shutdown_behavior = "terminate"
@@ -73,7 +73,8 @@ resource "aws_instance" "jumpbox" {
     }
 
     inline = [
-      "chmod +x install.sh", "echo ./install.sh ${var.ehime_subnet_cidr} ${var.ehime_gw} ${var.ehime_ip} ${var.access_key} ${var.secret_key} ${aws_subnet.ehime.id} ${var.default_az} ${var.region} ssh/jumpbox.pem",
+      "chmod +x install.sh",
+      "echo ./install.sh ${var.ehime_subnet_cidr} ${var.ehime_gw} ${var.ehime_ip} ${var.access_key} ${var.secret_key} ${aws_subnet.ehime.id} ${lookup(var.default_az, var.region)} ${var.region} ssh/jumpbox.pem",
     ]
   }
 

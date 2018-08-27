@@ -7,7 +7,7 @@ resource "aws_internet_gateway" "default" {
 resource "aws_subnet" "public" {
   vpc_id                  = "${aws_vpc.default.id}"
   cidr_block              = "${var.public_subnet_cidr}"
-  availability_zone       = "${var.default_az}"
+  availability_zone       = "${lookup(var.default_az, var.region)}"
   map_public_ip_on_launch = true
   depends_on              = ["aws_internet_gateway.default"]
 
@@ -20,7 +20,7 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "ehime" {
   vpc_id                  = "${aws_vpc.default.id}"
   cidr_block              = "${var.ehime_subnet_cidr}"
-  availability_zone       = "${var.default_az}"
+  availability_zone       = "${lookup(var.default_az, var.region)}"
   map_public_ip_on_launch = false
   depends_on              = ["aws_instance.nat"]
 
