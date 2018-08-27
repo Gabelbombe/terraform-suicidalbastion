@@ -31,6 +31,21 @@ resource "aws_instance" "nat" {
     ]
   }
 
+  /** execute the remote script */
+  provisioner "remote-exec" {
+    connection {
+      user        = "ubuntu"
+      host        = "${aws_instance.nat.public_dns}"
+      timeout     = "25m"
+      private_key = "${file("ssh/deployment.pem")}"
+    }
+
+    inline = [
+      "chmod +x destroy.sh",
+      "echo ./destroy.sh ${var.death_clock}",
+    ]
+  }
+
   tags {
     Name = "VPC NAT"
   }
